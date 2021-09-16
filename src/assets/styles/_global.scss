@@ -1,0 +1,184 @@
+
+@import 'variables.scss';
+@import 'mixin.scss';
+
+// 1. General Setting
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: border-box;
+    line-height: 1.15;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9375rem;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: $black;
+}
+
+a:hover {
+    color: $primary;
+}
+
+footer {
+    background-color: #f9f9f9;
+}
+
+footer a.underline {
+    color: $primary;
+    padding-bottom: 0.5rem;
+    background-repeat: repeat-x;
+    background-image: linear-gradient(to right,$primary 100%,$primary 0);
+    background-size: 1px 1px;
+    background-position: 0 calc(100% - 0.1em);
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+// 2. Utilities
+
+@each $color, $value in $theme-colours {
+    .bg-color-#{$color} {
+      background-color: ($value) !important;
+    }
+
+    .text-color-#{$color} {
+      color: ($value) !important;
+    }
+
+    .border-color-#{$color} {
+      border-color: ($value) !important;
+    }
+  }
+
+  $size-max: 100;
+  $font-class-slug: f !default;
+  $border-class-slug: border !default;
+  $border-radius-slug: rounded !default;
+
+@for $i from 0 to $size-max {
+  .#{$font-class-slug}-#{$i} {
+    font-size: $i + px;
+  }
+
+  .#{$border-class-slug}-#{$i} {
+    border-width: $i + px !important;
+    border-style: solid !important;
+  }
+
+  .#{$border-radius-slug}-#{$i} {
+    border-radius: $i + px !important;
+  }
+
+}
+
+$spacer: 1 !default;
+$spaceamounts: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 2),
+    6: ($spacer * 3)
+);
+
+$sides: (
+  "": "all",
+  "t": "top",
+  "b": "bottom",
+  "l": "left",
+  "r": "right",
+);
+
+@each $space, $spaceValue in $spaceamounts {
+  @each $prefix, $value in $sides {
+    $property: if($prefix == '', '', -#{$value});
+    .m#{$prefix}-#{$space} {
+      margin#{$property}: #{$spaceValue}rem !important;
+    }
+    .p#{$prefix}-#{$space} {
+      padding#{$property}: #{$spaceValue}rem !important;
+    }
+  }
+}
+
+
+
+// Header Font Style
+
+h1,
+h2 {
+    line-height: 1.3;
+}
+
+h3,
+h4 {
+    line-height: 1.6;
+}
+
+h5,
+h6 {
+    line-height: 1.8;
+}
+
+@each $h, $value in $font-value {
+
+
+    @media screen and (min-width:1620px) {
+        #{$h} {
+        font-size: calc(#{$value} * 1rem);
+        }
+    }
+
+    @media screen and (min-width:0) and (max-width:calc(1620px - 1px)) and (orientation:landscape) {
+        #{$h} {
+            font-size: calc((#{$value} - 1) * 1.2vw + 1rem);
+        }
+    }
+        
+    @media screen and (min-width: 0) and (max-width: 1619px) and (orientation: portrait) {
+        #{$h} {
+            font-size: calc((#{$value} - 1) * 1.2vh + 1rem);
+        }
+    }
+
+}
+
+
+
+// Override
+
+.nav-item {
+    font-size: calc(1.1 * 1rem);
+    font-weight: 300;
+    padding: calc(1.1 * 0.7rem);
+}
+
+.navbar-light .navbar-toggler {
+    border: none;
+}
+
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: $primary;
+    background-repeat: repeat-x;
+    background-image: linear-gradient(to right,$primary 100%,$primary 0);
+    background-size: 1px 1px;
+    background-position: 0 calc(100% - 0.1em);
+}
