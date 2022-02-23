@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
   { path:'', component: LayoutComponent },
   { path: 'about', component: AboutComponent },
   { path: 'work', component: WorkComponent },
-  { path: 'contact', component: ContactComponent }
+  { path: 'contact', component: ContactComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ]
 
 
@@ -34,11 +36,11 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(
-      appRoutes
+      appRoutes, {}
     )
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [ { provide: LocationStrategy, useClass: PathLocationStrategy } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
