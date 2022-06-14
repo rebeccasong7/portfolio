@@ -1,7 +1,7 @@
 $baseline: 1.3;
 
 $font-value: (
-    'h1' : 3,
+    'h1' : 5,
     'h2' : 2.8,
     'h3' : 2,
     'h4' : 1.5,
@@ -10,10 +10,12 @@ $font-value: (
 );
 
 $primary: #7A0F38 !default;
+$navy: #343E68;
 $black: #2c3335;
 
 $theme-colours: (
     'primary': $primary,
+    'navy' : $navy,
     'yellowgreen': #A8BF45,
     'green': #1B7461,
     'yellow': #F2B816,
